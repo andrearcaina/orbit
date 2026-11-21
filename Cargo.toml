@@ -1,6 +1,7 @@
 [package]
 name = "orbit"
-version = "0.1.0"
+description = "A toy DNS resolver CLI"
+version = "0.0.0"
 edition = "2024"
 
 [dependencies]

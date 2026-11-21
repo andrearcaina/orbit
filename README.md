@@ -1,6 +1,6 @@
 # orbit
 
-A Rust-based toy DNS resolver CLI/TUI tool for learning DNS and networking fundamentals.
+A toy DNS resolver CLI/TUI tool for learning how DNS and networking fundamentals works, as well as writing idiomatic Rust.
 
 ## DNS resolution flow
 
@@ -8,15 +8,13 @@ At a high level, resolving `example.com` looks like this:
 
 ```plaintext
 Orbit CLI
-    -> DNS query: example.com
-    -> Recursive resolver
-        -> Root server
-            -> .com TLD server
-                -> example.com authoritative server
-                <- A/AAAA/CNAME answer or NXDOMAIN
-            <- Referral or answer
-        <- Recursive answer
-    <- DNS response over UDP/TCP
+    -> extracts hostname: example.com
+    -> Root server
+    <- Referral to .com TLD server
+    -> .com TLD server
+    <- Referral to example.com authoritative server
+    -> example.com authoritative server
+    <- A/AAAA/CNAME answer or NXDOMAIN
 Orbit parses and displays the response
 ```
 
@@ -25,6 +23,6 @@ For a deeper explanation of packets, recursion, referrals, caching, and transpor
 ## Roadmap
 
 - [x] Initialize Rust CLI with `clap`
-- [ ] Implement basic DNS resolution through a recursive resolver
-- [ ] Implement iterative recursive resolution, caching, and better output
+- [ ] Build and parse DNS queries (either with or without UDP)
+- [ ] Query root, TLD, and authoritative servers; add caching and better output
 - [ ] Add a Ratatui/Crossterm TUI

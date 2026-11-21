@@ -1,6 +1,6 @@
 .PHONY: tidy fmt fmt-check vet check validate build build-release run clean install
 
-name ?= world
+url ?= https://example.com
 
 tidy:
 	cargo fetch
@@ -14,10 +14,13 @@ fmt-check:
 vet:
 	cargo clippy --all-targets --all-features -- -D warnings
 
+test:
+	cargo test
+
 check:
 	cargo check
 
-validate: tidy fmt fmt-check vet check build
+validate: tidy fmt fmt-check vet check test build
 
 build:
 	cargo build
@@ -26,7 +29,7 @@ build-release:
 	cargo build --release
 
 run:
-	cargo run -- --name $(name)
+	cargo run -- $(url)
 
 clean:
 	cargo clean
