@@ -6,19 +6,21 @@ use clap::Parser;
     about = "Resolve DNS names by following the DNS hierarchy.",
     long_about = "Orbit is a learning-focused DNS resolver.\n\
 \n\
-It extracts the hostname from a URL, queries DNS root servers, follows TLD \
+It queries DNS root servers, follows TLD \
 and authoritative-server referrals, and displays the final DNS response.\n\
 \n\
 Orbit does not delegate resolution to a public recursive resolver."
 )]
 struct Args {
-    #[arg(help = "URL whose hostname Orbit should resolve")]
-    url: String,
+    #[arg(help = "URL or domain name Orbit should resolve")]
+    input: String,
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
-    let resolver = orbit::dns::Resolver::new("8.8.8.8");
+    let resolver = orbit::dns::Resolver::new();
 
-    println!("{}", resolver.resolve(&args.url));
+    println!("{}", resolver.resolve(&args.input)?);
+
+    Ok(())
 }

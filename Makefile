@@ -1,6 +1,6 @@
 .PHONY: tidy fmt fmt-check vet check validate build build-release run clean install
 
-url ?= https://example.com
+url ?= example.com
 
 tidy:
 	cargo fetch

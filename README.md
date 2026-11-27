@@ -8,7 +8,7 @@ At a high level, resolving `example.com` looks like this:
 
 ```plaintext
 Orbit CLI
-    -> extracts hostname: example.com
+    -> DNS query: example.com
     -> Root server
     <- Referral to .com TLD server
     -> .com TLD server
